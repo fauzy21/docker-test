@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-test
+  namespace: yakes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-test
+  template:
+    metadata:
+      labels:
+        app: docker-test
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: docker-test
+        image: asia.gcr.io/allcare-systems/docker-test
+        ports:
+        - containerPort: 80
